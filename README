@@ -1,0 +1,137 @@
+This API supports creation of blogs with the given requirements and comments can be posted on each of the blogs on per-paragraph bases. 
+The api can be acesses at the endpoint /api/
+
+BLOGS:
+1)  To view a list of blogs access(5 at a time) :
+        GET /api/blogs/
+
+    Follow the url in the next parameter of the response to see the next 5 blogs(if thety exist)
+
+2)  To view the detailed view of blog with id <x>:
+        GET /api/blogs/x
+
+    In this view you get the title of the blogs, and the text of the blogs divided in 1 indexed paragraphs and the comments, along with the associated paragraph numbers
+3)  To create a new blog:
+        POST /api/blogs/
+
+    with the example payload:
+
+    {
+        "id": {
+            "type": "integer",
+            "required": false,
+            "read_only": true,
+            "label": "ID"
+        },
+        "title": {
+            "type": "string",
+            "required": true,
+            "read_only": false,
+            "label": "Title",
+            "max_length": 500
+        },
+        "text": {
+            "type": "string",
+            "required": true,
+            "read_only": false,
+            "label": "Text"
+        }
+    }
+
+4)  To see all available commands at the /api/blogs endpoint:
+    OPTIONS /api/blogs/
+
+COMMENTS:
+
+1)  To view a list of comments :
+        GET /api/comments/
+
+2)  To view the detailed view of blog with id <x>:
+        GET /api/comments/x
+
+3)  To create a new blog:
+        POST /api/comments/
+
+    with the example payload:
+
+    {
+        "id": {
+            "type": "integer",
+            "required": false,
+            "read_only": true,
+            "label": "ID"
+        },
+        "text": {
+            "type": "string",
+            "required": true,
+            "read_only": false,
+            "label": "Text"
+        },
+        "paragraphNumber": {
+            "type": "integer",
+            "required": false,
+            "read_only": false,
+            "label": "ParagraphNumber",
+        },
+        "time": {
+            "type": "datetime",
+            "required": false,
+            "read_only": false,
+            "label": "Time"
+        },
+        "blog": {
+            "type": "field",
+            "required": false,
+            "read_only": false,
+            "label": "Blog",
+            "choices": [
+                {
+                    "display_name": "Blog No. <id> Title: <title>",
+                    "value": "<id>"
+                }
+            ]
+        }
+    }
+
+    The endpoint will throw out validation error if the paragraph number is invalid correspoinding to the blog provided
+
+4)  To see all available commands at the /api/comments endpoint:
+    OPTIONS /api/comments/
+
+NOTE:
+1)  To ease the creation on blogs and comments you can use the http UI provided by the django   restframework by accessing the webpage using your browser at /api/blogs and /api/comments respectively.
+
+2)  You can send format=json as a get parameter to recieve the result in pure json.
+    example: 
+        GET /api/blogs/1?format=json 
+
+    returns the result in json
+
+3)  You can test the working version on https://blo.herokuapp.com/
+    Example:
+    
+    https://blo.herokuapp.com/api/blogs/ 
+    will list all blogs paginated with page size 5
+    
+    https://blo.herokuapp.com/api/blogs/1 
+    will return the detailed representation of blog with id=1 along with the associated comments
+
+    https://blo.herokuapp.com/api/blogs/1?format=json 
+    will return the detailed representation of blog with id=1 along with the associated comments in pure json
+    
+    https://blo.herokuapp.com/api/comments/ 
+    will list all comments
+    
+    https://blo.herokuapp.com/api/comments/1 
+    will list the comment with id=1
+
+    https://blo.herokuapp.com/api/comments/1?format=json
+    will list the comment with id=1 in pure json
+
+    Use the web interface to create new blogs and comments
+
+4)  Contact rajat100493@gmail.com for any queries
+
+
+
+

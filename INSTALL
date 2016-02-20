@@ -1,0 +1,20 @@
+Run the following commands on ubuntu to setup:
+To install python and git:
+	$ sudo apt-get install python git
+To get the code:
+	$ git clone http://www.github.com/rajatkapoor/blog
+Change to the directory with the code and run the following to get the required libraries:
+	$ sudo pip install -r requirements.txt
+
+NOTE:
+The settings file is configurd to use the database provided by heroku(PostGRES), and the database tables are already created. 
+To run the server locally make changes to the settings file as described in the settings file itself.
+Then run the following commands to generate migrations and setup DB(sqlite) locally:
+	$ python manage.py migrate
+	$ python manage.py makemigrations main
+	$ python manage.py migrate main
+
+Run the following command to run the server:
+	$ python manage.py runserver 0.0.0.0:80
+and browse to the URL provided to acess the api.
+For more on how to access the api see README
