@@ -76,7 +76,6 @@ WSGI_APPLICATION = 'blog.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
 
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -84,11 +83,10 @@ DATABASES = {
     }
 }
 
-# Comment the following section to run the code locally=======
+# comment the following section to run the code locally=======
 
 import dj_database_url
 db_from_env = dj_database_url.config()
-DATABASES = {}
 DATABASES['default'].update(db_from_env)
 
 # ============================================================
